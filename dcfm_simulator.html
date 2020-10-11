@@ -1,0 +1,58 @@
+<!doctype html>
+<!-- dcfm.html                          Samer Al-khateeb  -->
+<!-- Page for Simulating Deviant Cyber Flash Mobs (DCFM)  -->
+<!-- ==================================================== -->
+
+
+<html>
+<head>
+<title> DCFM Simulator</title>
+<script type="text/javascript" src="random.js"></script>
+<script type="text/javascript" src="dcfm_simulator.js"></script>
+<style>
+	
+	#main {text-align:left;}
+
+	p {font-family:Courier;}
+
+</style>
+</head>
+
+<body>
+	<div id="main">
+		<h2> Deviant Cyber Flash Mob (DCFM) Simulator </h2>
+		<h3> by <a href="https://sameral-khateeb.github.io/"> Samer Al-khateeb</a>, for Simulated/Artificial DCFM Events. </h3>
+
+		<br/>
+		<hr/>
+		<h4> The Practitioners Possible Choices are: </h4>
+			<ul>
+				<li> Act (A) </li>
+				<li> Withdraw (W) </li>
+				<li> Power Exchange (PE) </li>
+				<li> Act Against (AA) </li>
+			</ul>
+		<hr/>
+
+		<p> Enter the Total Number of Invited DCFM Practitioners <input type="text" id="invnumofprac" value="10" maxlength="9" /> inserting a number bigger than one hundred million (1 followed by 8 zeros), will take more time to simulate and might cause browser crash/freez.</p>
+
+		<p> Enter the Success of DCFM Threshold Value <input type="text" id="threshold" value="50"/> (%) </p>
+
+		<p> Enter the Number of Simulations (# of DCFM)<input type="text" id="numofsim" value="1"/> </p>
+
+		<p> Enter the Number of Powerful Actors <input type="text" id="numofpow" value="0"/> </p>
+
+		<input type="button" value="Run Simulator" onclick="runSim();" />
+		<input type="button" value="Reset" onclick="resetAll();" />
+		
+		<br/>
+		<hr/>
+
+    <div id ="output1"></div>
+    <div id ="output2"></div>
+
+	</div>
+
+</body>
+</html>
+
