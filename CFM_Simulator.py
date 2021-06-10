@@ -1,9 +1,11 @@
 # A program to simulate a CFM using Monte Carlo
 # methods and the Theory of Collective Action.
-#Q: Given the following parameters (Number of Invited
-#   CFM Practitioners, the Threshold Value of Success CFM,
-#   the Number of Simulations, the Number of Powerful Actors)
-#   what is the chance a CFM will be successful?
+
+# By: Samer Al-khateeb
+
+# Q1: Given the following parameters (Number of Invited People,
+# Threshold Value of the Mob Success, the Number of Simulations (Mobs),
+# the Number of Powerful Actors) what is the chance a Mob will succeed?
 
 from random import randrange
 
