@@ -1,7 +1,8 @@
+# Mob_Simulator-Q2.py
+# By: Samer Al-khateeb
+
 # A program to simulate a Mob using Monte Carlo
 # methods and the Theory of Collective Action.
-
-# By: Samer Al-khateeb
 
 # Q2: Given the following parameters (Number of Invited People,
 # Threshold Value of the Mob Success, and the Number of Simulations (Mobs)),
