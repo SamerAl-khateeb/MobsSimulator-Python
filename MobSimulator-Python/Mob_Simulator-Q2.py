@@ -48,7 +48,7 @@ def SimulateOneMob(Mob_Practitioners, Success_Threshold):
             else:
                 Withdraw_Counter = Withdraw_Counter + 1
                 
-        #No interest but have control, practitioner will ACT or POWER EXCHANGE 
+        #No interest but have control, practitioner will WITHDRAW or POWER EXCHANGE 
         elif ((P_Interest == 0) and (P_Control == 1)):
             Participant_Decision = randrange(0,2)
             if (Participant_Decision == 0):
