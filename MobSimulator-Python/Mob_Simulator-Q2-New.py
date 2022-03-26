@@ -47,7 +47,7 @@ def writeOverAllStatToCSV(biglist):
     # column names
     columnNames = ["Threshold Value", "Number Of Mobs Simulated", 
                     "Mobs Success Rate", "Mobs Fail Rate", 
-                    "Average Needed Powerful Actors"]
+                    "Number of Invited Participants","Average Needed Powerful Actors"]
     
     # data rows of csv file
     row = biglist
@@ -153,8 +153,8 @@ def SimulateOneMob(Mob_Practitioners, Success_Threshold):
     #the participation rate in a mob counting for the number of acted actors, powerful actors, and acted against actors divided by all the invited people.
     #a negative participation rate means more people were opposing the mob than agreening with it
 
-    #Participation_Rate = (Act_Counter - Act_Against_Counter) / Mob_Practitioners
-    Participation_Rate = (Act_Counter) / Mob_Practitioners
+    Participation_Rate = (Act_Counter - Act_Against_Counter) / Mob_Practitioners
+    #Participation_Rate = (Act_Counter) / Mob_Practitioners
 
     #if the participation rate is greater than the threshold, its a successful Mob
     if (Participation_Rate >= (Success_Threshold / 100)):
@@ -166,7 +166,7 @@ def SimulateOneMob(Mob_Practitioners, Success_Threshold):
         #Needed_Powerful_Actors = (((Success_Threshold * Mob_Practitioners ) / 100)) - Act_Counter + Act_Against_Counter
         Needed_Powerful_Actors = (((Success_Threshold * Mob_Practitioners ) / 100)) - Act_Counter
         
-    return Mob_Result, Needed_Powerful_Actors, Act_Counter, Withdraw_Counter, Power_Exchange_Counter, Act_Against_Counter, Participation_Rate
+    return Mob_Result, math.ceil(Needed_Powerful_Actors), Act_Counter, Withdraw_Counter, Power_Exchange_Counter, Act_Against_Counter, Participation_Rate
 
 def SimulateManyMob(Practitioners, Threshold, Num_Simulation):
     num_Of_Success_Mob = 0
@@ -204,7 +204,7 @@ def SimulateManyMob(Practitioners, Threshold, Num_Simulation):
     
     return num_Of_Success_Mob, num_Of_Fail_Mob, Average_Needed_Powerful_Actors
 
-def printStats(T_o, Num_Of_Mob_Success, Num_Of_Mob_Fail, Num_Simulation, Average_Needed_Powerful_Actors): 
+def printStats(T_o, P, Num_Of_Mob_Success, Num_Of_Mob_Fail, Num_Simulation, Average_Needed_Powerful_Actors): 
     mobSuccessRate = round(((Num_Of_Mob_Success / Num_Simulation) * 100),2)
     mobFailRate = round(((Num_Of_Mob_Fail / Num_Simulation) * 100), 2)
     print()
@@ -212,13 +212,21 @@ def printStats(T_o, Num_Of_Mob_Success, Num_Of_Mob_Fail, Num_Simulation, Average
     print("The Mobs Success rate is ", mobSuccessRate, "%")
     print("The Mobs Fail rate is ", mobFailRate, "%")
     print("On Average you need at least", Average_Needed_Powerful_Actors, " more Powerful Actors to Succeed")
-    writeOverAllStatToCSV([T_o, Num_Simulation, mobSuccessRate, mobFailRate, Average_Needed_Powerful_Actors])
+    writeOverAllStatToCSV([T_o, Num_Simulation, mobSuccessRate, mobFailRate, P, Average_Needed_Powerful_Actors])
 
 
 def main():
-    P, T_o, N_Sim = getInputs()
-    Num_Of_Mob_Success, Num_Of_Mob_Fail, Needed = SimulateManyMob(P, T_o, N_Sim)
-    printStats(T_o, Num_Of_Mob_Success, Num_Of_Mob_Fail, N_Sim, Needed)
+    #P, T_o, N_Sim = getInputs()
+    numOfParticipantsList = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 
+        200, 300, 400, 500, 600, 700, 800, 900, 1000,
+        2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000]
+    
+    for num in numOfParticipantsList:
+        T_o = 35.5
+        N_Sim = 10000
+        P = num
+        Num_Of_Mob_Success, Num_Of_Mob_Fail, Needed = SimulateManyMob(P, T_o, N_Sim)
+        printStats(T_o, P, Num_Of_Mob_Success, Num_Of_Mob_Fail, N_Sim, Needed)
     
 main()
 
