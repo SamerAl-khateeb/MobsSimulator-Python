@@ -135,16 +135,18 @@ def SimulateOneMob(Mob_Practitioners, Success_Threshold, Num_Powerful_Actors):
     if (S_Withdraw_Counter >= Power_Exchange_Counter):
         #increment the number of act by the people who are willing to power exchange
         Act_Counter = Act_Counter + Power_Exchange_Counter
-        #update the number of withdraw by adding the people who are left after the power exchange
-        Withdraw_Counter = Withdraw_Counter + (S_Withdraw_Counter - Power_Exchange_Counter)
+        #update the number of withdraw by adding the people who did the power exchange
+        Withdraw_Counter = Withdraw_Counter + Power_Exchange_Counter
+        # subtract the number of people who did the exchange from the special withdraw 
+        S_Withdraw_Counter = S_Withdraw_Counter - Power_Exchange_Counter
         #after this no one is left for power exchange, because they all exchanged and now are acting
         Power_Exchange_Counter = 0
     else:
         #increment the number of act by the people who have interest but no control
         Act_Counter = Act_Counter + S_Withdraw_Counter
         #since all the people who have interest and no control did the power exchange
-        #(and now are acting) no one is left to be added 
-        Withdraw_Counter = Withdraw_Counter + 0
+        #(and now are acting) the same number of people from the power exchange will not act 
+        Withdraw_Counter = Withdraw_Counter + S_Withdraw_Counter
         #subtract the number who did the power exchange already (and now are acting) from
         #the original number of power exchange
         Power_Exchange_Counter = Power_Exchange_Counter - S_Withdraw_Counter

@@ -1,4 +1,4 @@
-# Mob_Simulator.py
+# Mob_Simulator-Q2.py
 # By: Samer Al-khateeb
 
 # A program to simulate a Mob using Monte Carlo
@@ -136,16 +136,18 @@ def SimulateOneMob(Mob_Practitioners, Success_Threshold):
     if (S_Withdraw_Counter >= Power_Exchange_Counter):
         #increment the number of act by the people who are willing to power exchange
         Act_Counter = Act_Counter + Power_Exchange_Counter
-        #update the number of withdraw by adding the people who are left after the power exchange
-        Withdraw_Counter = Withdraw_Counter + (S_Withdraw_Counter - Power_Exchange_Counter)
+        #update the number of withdraw by adding the people who did the power exchange
+        Withdraw_Counter = Withdraw_Counter + Power_Exchange_Counter
+        # subtract the number of people who did the exchange from the special withdraw 
+        S_Withdraw_Counter = S_Withdraw_Counter - Power_Exchange_Counter
         #after this no one is left for power exchange, because they all exchanged and now are acting
         Power_Exchange_Counter = 0
     else:
         #increment the number of act by the people who have interest but no control
         Act_Counter = Act_Counter + S_Withdraw_Counter
         #since all the people who have interest and no control did the power exchange
-        #(and now are acting) no one is left to be added
-        Withdraw_Counter = Withdraw_Counter + 0
+        #(and now are acting) the same number of people from the power exchange will not act 
+        Withdraw_Counter = Withdraw_Counter + S_Withdraw_Counter
         #subtract the number who did the power exchange already (and now are acting) from
         #the original number of power exchange
         Power_Exchange_Counter = Power_Exchange_Counter - S_Withdraw_Counter
@@ -163,8 +165,8 @@ def SimulateOneMob(Mob_Practitioners, Success_Threshold):
     #else its a fail Mob and we need to calculate how much was needed to be successful
     else:
         Mob_Result = "Fail"
-        #Needed_Powerful_Actors = (((Success_Threshold * Mob_Practitioners ) / 100)) - Act_Counter + Act_Against_Counter
-        Needed_Powerful_Actors = (((Success_Threshold * Mob_Practitioners ) / 100)) - Act_Counter
+        Needed_Powerful_Actors = (((Success_Threshold * Mob_Practitioners ) / 100)) - Act_Counter + Act_Against_Counter
+        #Needed_Powerful_Actors = (((Success_Threshold * Mob_Practitioners ) / 100)) - Act_Counter
         
     return Mob_Result, math.ceil(Needed_Powerful_Actors), Act_Counter, Withdraw_Counter, Power_Exchange_Counter, Act_Against_Counter, Participation_Rate
 
