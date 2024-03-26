@@ -1,6 +1,6 @@
-# correlationAnalysis.py         By: Samer Al-khateeb
+# fig4corr.py         By: Samer Al-khateeb
 
-# code is a modified version of this code 
+# This code is a modified version of this code 
 # https://www.statology.org/correlation-in-python/
 # To run this code you need to install the following dependencies:
 # For Mac users type:

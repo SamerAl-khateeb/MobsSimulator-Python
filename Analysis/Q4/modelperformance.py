@@ -1,4 +1,6 @@
-# Source of the code: https://machinelearningmastery.com/how-to-calculate-precision-recall-f1-and-more-for-deep-learning-models/
+# modelperformance.py      By: Samer Al-khateeb
+# This code is a modified version of the code provided here: 
+# https://machinelearningmastery.com/how-to-calculate-precision-recall-f1-and-more-for-deep-learning-models/
 
 # demonstration of calculating metrics for a our model
 from sklearn.metrics import accuracy_score
