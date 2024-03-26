@@ -14,7 +14,12 @@ import math
 import csv
 import os
 
-# funciton to write each mob stat into a row in a CSV file
+class Agent():
+    def __init__(self):
+        self.interest = randrange(0,2)
+        self.control = randrange(0,2)
+
+# function to write each mob stat into a row in a CSV file
 def writeIndividualMobStatToCSV(biglist):
     # column names
     columnNames = ["Threshold", "Mob_Result", "Needed_Powerful_Actors", "Act_Counter", "Withdraw_Counter", "Power_Exchange_Counter", "Act_Against_Counter", "Participation_Rate"]
@@ -93,17 +98,16 @@ def SimulateOneMob(Mob_Practitioners, Success_Threshold):
 
     #for each participant lets examing what will (s)he do?
     for participant in range(Mob_Practitioners):
-        
-        # randomly assigning the participant an interest and control
-        P_Interest = randrange(0,2)
-        P_Control = randrange(0,2)
+
+        #create an agent
+        participantAgent = Agent()
         
         # have interest and have control, practitioner will ACT
-        if ((P_Interest == 1) and (P_Control == 1)):
+        if ((participantAgent.interest == 1) and (participantAgent.control == 1)):
             Act_Counter = Act_Counter + 1
             
         # have interest but no control, practitioner will ACT or WITHDRAW
-        elif ((P_Interest == 1) and (P_Control == 0)):
+        elif ((participantAgent.interest == 1) and (participantAgent.control == 0)):
             Participant_Decision = randrange(0,2)
             if (Participant_Decision == 1):
                 Act_Counter = Act_Counter + 1
@@ -113,7 +117,7 @@ def SimulateOneMob(Mob_Practitioners, Success_Threshold):
                 
                 
         # No interest but have control, practitioner will WITHDRAW or POWER EXCHANGE 
-        elif ((P_Interest == 0) and (P_Control == 1)):
+        elif ((participantAgent.interest == 0) and (participantAgent.control == 1)):
             Participant_Decision = randrange(0,2)
             if (Participant_Decision == 0):
                 Withdraw_Counter = Withdraw_Counter + 1
@@ -122,7 +126,7 @@ def SimulateOneMob(Mob_Practitioners, Success_Threshold):
                 Power_Exchange_Counter = Power_Exchange_Counter + 1
             
         # No interest and No control, practitioner will WITHDRAW or ACT AGAINST
-        elif ((P_Interest == 0) and (P_Control == 0)):
+        elif ((participantAgent.interest == 0) and (participantAgent.control == 0)):
             Participant_Decision = randrange(0,2)
             if (Participant_Decision == 0):
                 Withdraw_Counter = Withdraw_Counter + 1
