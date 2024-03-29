@@ -1,4 +1,4 @@
-# Mob_Simulator-Q1.py
+# Mob_Simulator-Q3.py
 # By: Samer Al-khateeb
 
 # A program to simulate a Mob using Monte Carlo
