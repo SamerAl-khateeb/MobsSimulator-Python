@@ -1,0 +1,5 @@
+,Mobs Success Rate,Mobs Fail Rate,Number of Invited Participants,Average Needed Powerful Actors
+Mobs Success Rate,1.0,-1.0,0.8679395869975407,0.9925958144835306
+Mobs Fail Rate,-1.0,1.0,-0.8679395869975407,-0.9925958144835305
+Number of Invited Participants,0.8679395869975407,-0.8679395869975407,1.0,0.8493327404341264
+Average Needed Powerful Actors,0.9925958144835306,-0.9925958144835305,0.8493327404341264,1.0

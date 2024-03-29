@@ -52,10 +52,7 @@ print("The p-value is:", spearManPValue)
 
 
 #determininig pairwise correlation
-#pearsonCorrelationMatrix = csvFileContentAsDataFrame.corr(method='pearson')
 spearmanCorrelationMatrix = csvFileContentAsDataFrame.corr(method='spearman')
-
-#print(pearsonCorrelationMatrix)
 print(spearmanCorrelationMatrix)
 
 fig = plt.figure()
@@ -77,3 +74,20 @@ plt.show()
 pd.DataFrame(spearmanCorrelationMatrix).to_csv("SpearmanCorrelationOutput.csv")
 
 
+# Create an empty DataFrame to store p-values
+p_values = pd.DataFrame(columns=spearmanCorrelationMatrix.columns, index=spearmanCorrelationMatrix.columns)
+
+# Calculate p-values
+for col1 in spearmanCorrelationMatrix.columns:
+    for col2 in spearmanCorrelationMatrix.columns:
+        pearson_corr, p_value = spearmanr(csvFileContentAsDataFrame[col1], csvFileContentAsDataFrame[col2])
+        p_values.at[col1, col2] = p_value
+
+#to save the p-values matrix as a csv file
+pd.DataFrame(p_values).to_csv("SpearmanCorrelation_p-values.csv")
+
+# Display correlation matrix with p-values
+print("Spearman correlation coefficients:")
+print(spearmanCorrelationMatrix)
+print("\nP-values:")
+print(p_values)
