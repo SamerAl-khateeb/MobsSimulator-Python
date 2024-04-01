@@ -12,6 +12,7 @@ from random import randrange
 import csv
 import os
 import math
+import time
 
 class Agent():
     def __init__(self):
@@ -212,6 +213,9 @@ def printStats(T_o, Num_Of_Mob_Success, Num_Of_Mob_Fail, Num_Simulation, Avg_Par
 
 
 def main():
+    #get the start time
+    st = time.time()
+
     #P, T_o, N_Sim, N_Pow_Act = getInputs()
     thresholdList = [0.5]
     for i in thresholdList:
@@ -221,4 +225,11 @@ def main():
         T_o = i
         Num_Of_Mob_Success, Num_Of_Mob_Fail, Avg_Participation_Rate = SimulateManyMobs(P, T_o, N_Sim, N_Pow_Act)
         printStats(T_o, Num_Of_Mob_Success, Num_Of_Mob_Fail, N_Sim, Avg_Participation_Rate)
+
+    #get the end time
+    et = time.time()
+    #get the execution time
+    elapsed_time = et - st
+    print()
+    print('Execution time: ', elapsed_time, 'seconds')
 main()

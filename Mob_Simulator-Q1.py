@@ -12,6 +12,7 @@
 from random import randrange
 import csv
 import os
+import time
 
 class Agent():
     def __init__(self):
@@ -48,7 +49,7 @@ def writeIndividualMobStatToCSV(biglist):
 
 # function to write the overall simulation stats into a row in a CSV file
 def writeOverAllStatToCSV(biglist):
-        # column names
+    # column names
     columnNames = ["Threshold Value", "Number Of Mobs Simulated", 
                     "Mobs Success Rate", "Mobs Fail Rate", 
                     "Average Participation Rate"]
@@ -159,9 +160,12 @@ def SimulateOneMob(Mob_Practitioners, Success_Threshold, Num_Powerful_Actors):
     # the participation rate in a mob counting for the number of acted actors, powerful actors, 
     # and acted against actors divided by all the invited people.
     # a negative participation rate means more people were opposing the mob than agreening with it
-
-    Participation_Rate = (Act_Counter + Num_Powerful_Actors - Act_Against_Counter) / Mob_Practitioners
-    #Participation_Rate = (Act_Counter + Num_Powerful_Actors) / Mob_Practitioners
+    
+    #competing switch is set to ON (Eq1)
+    #Participation_Rate = (Act_Counter + Num_Powerful_Actors - Act_Against_Counter) / Mob_Practitioners
+    
+    #competing switch is set to OFF (Eq2)
+    Participation_Rate = (Act_Counter + Num_Powerful_Actors) / Mob_Practitioners
 
     # based on the participaiton rate and threshold value we can determine whether a mob succeeded or not
     if (Participation_Rate >= Success_Threshold):
@@ -214,6 +218,9 @@ def printStats(T_o, Num_Of_Mob_Success, Num_Of_Mob_Fail, Num_Simulation, Avg_Par
 
 
 def main():
+    #get the start time
+    st = time.time()
+
     #P, T_o, N_Sim, N_Pow_Act = getInputs()
     thresholdList = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
     for i in thresholdList:
@@ -223,4 +230,11 @@ def main():
         T_o = i
         Num_Of_Mob_Success, Num_Of_Mob_Fail, Avg_Participation_Rate = SimulateManyMobs(P, T_o, N_Sim, N_Pow_Act)
         printStats(T_o, Num_Of_Mob_Success, Num_Of_Mob_Fail, N_Sim, Avg_Participation_Rate)
+
+    #get the end time
+    et = time.time()
+    #get the execution time
+    elapsed_time = et - st
+    print()
+    print('Execution time: ', elapsed_time, 'seconds')
 main()

@@ -13,6 +13,7 @@ from random import randrange
 import math
 import csv
 import os
+import time
 
 class Agent():
     def __init__(self):
@@ -158,9 +159,12 @@ def SimulateOneMob(Mob_Practitioners, Success_Threshold):
 
     #the participation rate in a mob counting for the number of acted actors, powerful actors, and acted against actors divided by all the invited people.
     #a negative participation rate means more people were opposing the mob than agreening with it
-
-    Participation_Rate = (Act_Counter - Act_Against_Counter) / Mob_Practitioners
-    #Participation_Rate = (Act_Counter) / Mob_Practitioners
+    
+    #competing switch is set to ON (Eq1)
+    #Participation_Rate = (Act_Counter - Act_Against_Counter) / Mob_Practitioners
+    
+    #competing switch is set to OFF (Eq2)
+    Participation_Rate = (Act_Counter) / Mob_Practitioners
 
     #if the participation rate is greater than the threshold, its a successful Mob
     if (Participation_Rate >= (Success_Threshold / 100)):
@@ -169,8 +173,11 @@ def SimulateOneMob(Mob_Practitioners, Success_Threshold):
     #else its a fail Mob and we need to calculate how much was needed to be successful
     else:
         Mob_Result = "Fail"
-        Needed_Powerful_Actors = (((Success_Threshold * Mob_Practitioners ) / 100)) - Act_Counter + Act_Against_Counter
-        #Needed_Powerful_Actors = (((Success_Threshold * Mob_Practitioners ) / 100)) - Act_Counter
+        #competing switch is set to ON (Eq1)
+        #Needed_Powerful_Actors = (((Success_Threshold * Mob_Practitioners ) / 100)) - Act_Counter + Act_Against_Counter
+        
+        #competing switch is set to OFF (Eq2)
+        Needed_Powerful_Actors = (((Success_Threshold * Mob_Practitioners ) / 100)) - Act_Counter
         
     return Mob_Result, math.ceil(Needed_Powerful_Actors), Act_Counter, Withdraw_Counter, Power_Exchange_Counter, Act_Against_Counter, Participation_Rate
 
@@ -222,6 +229,9 @@ def printStats(T_o, P, Num_Of_Mob_Success, Num_Of_Mob_Fail, Num_Simulation, Aver
 
 
 def main():
+    #get the start time
+    st = time.time()
+
     #P, T_o, N_Sim = getInputs()
     numOfParticipantsList = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 
         200, 300, 400, 500, 600, 700, 800, 900, 1000,
@@ -233,6 +243,13 @@ def main():
         P = num
         Num_Of_Mob_Success, Num_Of_Mob_Fail, Needed = SimulateManyMob(P, T_o, N_Sim)
         printStats(T_o, P, Num_Of_Mob_Success, Num_Of_Mob_Fail, N_Sim, Needed)
+
+    #get the end time
+    et = time.time()
+    #get the execution time
+    elapsed_time = et - st
+    print()
+    print('Execution time: ', elapsed_time, 'seconds')
     
 main()
 

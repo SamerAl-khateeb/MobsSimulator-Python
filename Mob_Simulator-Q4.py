@@ -20,6 +20,7 @@ from random import randrange
 import csv
 import os
 import math
+import time
 
 # added for Question 4
 import pandas as pd
@@ -231,9 +232,12 @@ def printStats(T_o, Num_Of_Mob_Success, Num_Of_Mob_Fail, Num_Simulation, Avg_Par
 
 
 def main():
+    #get the start time
+    st = time.time()
+
     #P, T_o, N_Sim, N_Pow_Act = getInputs()
-    csvFileName = 'cyberMob.csv'
-    #csvFileName = 'physicalMob.csv'
+    #csvFileName = 'cyberMob.csv'
+    csvFileName = 'physicalMob.csv'
     csvFileContentAsDataFrame = (pd.read_csv(csvFileName))
     
     # file columns
@@ -252,4 +256,11 @@ def main():
 
         Num_Of_Mob_Success, Num_Of_Mob_Fail, Avg_Participation_Rate, Overall_Mob_Result = SimulateManyMobs(P, T_o, N_Sim, N_Pow_Act)
         printStats(T_o, Num_Of_Mob_Success, Num_Of_Mob_Fail, N_Sim, Avg_Participation_Rate, Overall_Mob_Result)
+
+    #get the end time
+    et = time.time()
+    #get the execution time
+    elapsed_time = et - st
+    print()
+    print('Execution time: ', elapsed_time, 'seconds')
 main()
